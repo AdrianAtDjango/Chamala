@@ -1,0 +1,11 @@
+{% load static %}
+
+{% if chamado.prioridade == 'Urgente' %}
+<td class="prioridade"><span id="urgente"><img src="{% static 'assets/prio-urgente.svg' %}">Urgente</span></td>
+{% elif chamado.prioridade == 'Alta' %}
+<td class="prioridade"><span id="alta"><img src="{% static 'assets/prio-alta.svg' %}">Alta</span></td>
+{% elif chamado.prioridade == 'Média' %}
+<td class="prioridade"><span id="media"><img src="{% static 'assets/prio-media.svg' %}">Média</span></td>
+{% else %}
+<td class="prioridade"><span id="baixa"><img src="{% static 'assets/prio-baixa.svg' %}">Baixa</span></td>
+{% endif %}

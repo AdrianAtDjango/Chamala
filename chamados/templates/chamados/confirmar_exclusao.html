@@ -1,0 +1,22 @@
+{% extends 'chamados/base.html' %}
+{% load static %}
+
+{% block conteudo %}
+<main class="confirm">
+    <section class="text">
+        <h2>Exluir Chamado</h2>
+    </section>    
+    <div class="stack">
+        <p>Você tem certeza que deseja excluir o chamado "{{ chamado }}"?</p>
+        <form method="post">
+            {% csrf_token %}
+            <div class="buttons">
+                <button type="submit">Excluir <img src="{% static 'assets/check-circle.svg' %}" alt=""></button>
+                <a href="{% url 'lista_chamados' %}">
+                    <button>Cancelar <img src="{% static 'assets/cancel-fff.svg' %}" alt=""></button>
+                </a>
+            </div>
+        </form>
+    </div>
+</main>
+{% endblock %}

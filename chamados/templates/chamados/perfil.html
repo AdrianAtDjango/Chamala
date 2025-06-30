@@ -1,0 +1,26 @@
+{% extends 'chamados/base.html' %}
+{% load static %}
+
+{% block conteudo %}
+<main class="profile">
+    <section class="text">
+        <h2>Visualizar informações sobre o seu perfil</h2>
+    </section>
+    <div class="stack">
+        <div class="img-user">
+            <img src="{% static 'assets/user.jpg' %}">
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <div class="buttons">
+                <button type="submit">Salvar Alterações<img src="{% static 'assets/check-circle.svg' %}"></button>
+                <a href="{% url 'lista_chamados' %}">
+                    <button>Cancelar <img src="{% static 'assets/cancel-fff.svg' %}"></button>
+                </a>
+            </div>
+        </form>
+    </div>
+</main>
+{% endblock %}

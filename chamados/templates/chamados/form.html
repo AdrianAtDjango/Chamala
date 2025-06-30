@@ -1,0 +1,21 @@
+{% extends 'chamados/base.html' %}
+{% load static %}
+{% block conteudo %}
+<main class="form">
+    <section class="text">
+        <h2>{{ form.instance.id|yesno:"Editar Chamado,Novo Chamado" }}</h2>
+    </section>
+    <div class="stack">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="buttons">
+                <button type="submit">Salvar <img src="{% static 'assets/check-circle.svg' %}" alt=""></button>
+                <a href="{% url 'lista_chamados' %}">
+                    <button>Cancelar <img src="{% static 'assets/cancel-fff.svg' %}" alt=""></button>
+                </a>
+            </div>
+        </form>
+    </div>
+</main>
+{% endblock %}

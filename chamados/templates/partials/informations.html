@@ -1,0 +1,27 @@
+
+<section class="informations">
+    <div class="infos">
+        <div class="infos-txt">
+            <h1>Total de Chamados</h1>
+            <h2>{{ total_chamados|stringformat:"04d" }}</h2>
+        </div>
+    </div>
+    <div class="infos">
+        <div class="infos-txt">
+            <h1>Em Andamento</h1>
+            <h2>{{ em_andamento|stringformat:"04d" }}</h2>
+        </div>
+    </div>
+    <div class="infos" id="pendente">
+        <div class="infos-txt" >
+            <h1>Chamados Pendentes</h1>
+            <h2>{{ a_fazer|stringformat:"04d" }}</h2>
+        </div>
+    </div>
+    <div class="infos" id="resolvido">
+        <div class="infos-txt">
+            <h1>Chamados Resolvidos</h1>
+            <h2>{{ resolvidos|stringformat:"04d" }}</h2>
+        </div>
+    </div>
+</section>

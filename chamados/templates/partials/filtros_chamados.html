@@ -1,0 +1,52 @@
+{% load static %}
+<form method="get" action="{% url 'lista_chamados' %}" class="filtros">
+    <div class="div-filtro" id="um">
+      <div class="filtro" id="text">
+        <img src="{% static 'assets/filter.svg' %}" alt="">
+        <h4>Filtros:</h4>
+      </div>
+
+      <div class="filtro">
+          <img src="{% static 'assets/check-fill.svg' %}">
+          <button type="submit" name="favorito" value="True">Selecionados</button>
+          <button type="submit">Todos</button>
+      </div>
+    </div>
+  
+    <div class="div-filtro">
+      <div class="filtro">
+          <img src="{% static 'assets/safety.svg' %}">
+          {% for prioridade in prioridades %}
+            <button type="submit" name="prioridade" value="{{ prioridade }}">
+              {{ prioridade }}
+            </button>
+          {% endfor %}
+      </div>
+    
+      <div class="filtro">
+          <img src="{% static 'assets/info.svg' %}">
+          {% for stat in status %}
+          <button type="submit" name="status" value="{{ stat }}">
+            {{ stat }}
+          </button>
+          {% endfor %}
+      </div>
+    </div>
+
+    
+</form>
+
+<form method="get" action="{% url 'lista_chamados' %}" class="select-filtros">
+ <div class="div-filtros">
+    <select name="filtro" id="filtro" onchange="this.form.submit()">
+      <option value="">Filtros: </option>
+      <option value="favorito">Selecionados</option>
+      {% for prioridade in prioridades %}
+        <option value="prioridade_{{ prioridade }}">{{ prioridade }}</option>
+      {% endfor %}
+      {% for stat in status %}
+        <option value="status_{{ stat }}">{{ stat }}</option>
+      {% endfor %}
+    </select>
+  </div>
+</form>

@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Chamados</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="main">
+        {% if user.is_authenticated %}
+            <section class="sidebar">
+                <div class="user">
+                    <div class="user-informations">
+                        {% if user.foto_perfil %}
+                            <img src="{{ user.foto_perfil.url }}">
+                        {% else %}
+                            <img src="{% static 'assets/user.jpg' %}">
+                        {% endif %}
+                        <div class="user-informations-txt">
+                            <h1>Olá, {{ user.nome_completo }}!</h1>
+                            <p>{{ user.nivelUser }}</p>
+                        </div>
+                    </div>
+                </div>
+                <nav class="navbar">
+                    <ul>
+                        <li id="search-input">
+                            <input type="search" placeholder="Search...">
+                        </li>
+                        <li id="search">
+                            <button>
+                                <img src="{% static 'assets/search.svg' %}" class="icon">
+                            </button>
+                        </li>
+                        <li>
+                            <a href="{% url 'lista_chamados' %}">
+                                <button>
+                                    <img src="{% static 'assets/home.svg' %}" class="icon">Dashboard
+                                </button>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'criar_chamado' %}">
+                                <button>
+                                    <img src="{% static 'assets/add.svg' %}" class="icon">Criar chamado
+                                </button>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'perfil' %}">
+                                <button>
+                                    <img src="{% static 'assets/user.svg' %}" class="icon">Your Profile
+                                </button>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'login' %}">
+                                <button>
+                                    <img src="{% static 'assets/logout.svg' %}" class="icon">Logout
+                                </button>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </section>
+        {% endif %}
+        <div class="content">
+            {% block conteudo %}{% endblock %}
+        </div>
+    </div>
+</body>
+</html>

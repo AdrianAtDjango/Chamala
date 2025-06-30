@@ -1,0 +1,75 @@
+{% extends 'chamados/base.html' %}
+{% load static %}
+{% load informations %}
+{% load filtros_chamados %}
+<body>
+    {% block conteudo %}
+    {% render_informations %}
+    {% render_filtros_chamados %}
+        <main class="table">
+            <div class="stack">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Título</th>
+                            <th>Prioridade</th>
+                            <th>Status</th>
+                            <th>Data</th>
+                            <th id="actions">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for chamado in chamados %}
+                            <tr>
+                                <td>
+                                    <form method="post" action="{% url 'toggle_favorito' chamado.id %}">
+                                        {% csrf_token %}
+                                        <input type="checkbox" name="favorito" onchange="this.form.submit()" {% if chamado.favorito %}checked{% endif %}>
+                                    </form>
+                                </td>
+                                <td class="title">
+                                    {% if chamado.titulo|length >= 20 %}
+                                        <marquee behavior="alternate" scrolldelay="250">
+                                            {{ chamado.titulo }}
+                                        </marquee>
+                                    {% else %}
+                                        <p>{{ chamado.titulo }}</p>
+                                    {% endif %}
+                                </td>
+                                {% include 'chamados/prioridade.html' %}
+                                {% include 'chamados/atender.html' with form=chamado.form chamado=chamado %}
+                                <td>{{ chamado.data_criacao|date:"d/m/Y" }}</td>
+                                <td id="actions">
+                                        <a href="{% url 'detalhes_chamado' chamado.id %}">
+                                            <button id="view">
+                                                <img src="{% static 'assets/eye.svg' %}">
+                                            </button>
+                                        </a>
+                                        {% if user.nivelUser != 'Usuário' %}
+                                            <a href="{% url 'editar_chamado' chamado.id %}">
+                                                <button>
+                                                    <img src="{% static 'assets/edit.svg' %}">
+                                                </button>
+                                            </a>
+                                            <a href="{% url 'deletar_chamado' chamado.id %}">
+                                                <button>
+                                                    <img src="{% static 'assets/delete.svg' %}">
+                                                </button>
+                                            </a>
+                                        {% endif %}
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td id="empty" colspan="6">Nenhum chamado cadastrado.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    {% endblock %}
+</body>
+</html>
+

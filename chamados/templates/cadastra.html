@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <main class="login">
+        <div class="container">
+            <div class="text">
+                <h1>Crie sua conta agora!</h1>
+                <p>É rápido, fácil e gratuito</p><br><br>
+            </div>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Criar conta</button>
+                <a href="{% url 'login' %}">Já tem uma conta? Faça Login agora! &#9205;</a>
+            </form>
+        </div>
+    </main>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const password1 = document.getElementById('id_password1');
+        const password2 = document.getElementById('id_password2');
+
+        if (password1) {
+        password1.setAttribute('placeholder', 'Senha');
+        }
+
+        if (password2) {
+        password2.setAttribute('placeholder', 'Confirme sua senha');
+        }
+    });
+</script>
+</html>

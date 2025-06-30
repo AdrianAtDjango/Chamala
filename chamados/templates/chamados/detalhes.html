@@ -1,0 +1,55 @@
+{% extends 'chamados/base.html' %}
+
+{% block conteudo %}
+<main class="details">
+    <section class="text">
+        <h2>Detalhes do Chamado:</h2>
+    </section>
+    <div class="stack">
+        <table style="width: 100%;">
+            <tr>
+                <th>Campo</th>
+                <th>Valor</th>
+            </tr>
+            <tr>
+                <td>#</td>
+                <td>{{ chamado.id }}</td>
+            </tr>
+            <tr>
+                <td>Descrição</td>
+                <td>{{ chamado.descricao }}</td>
+            </tr>
+            <tr>
+                <td>Prioridade</td>
+                {% include 'chamados/prioridade.html' %}
+            </tr>
+            <tr>
+                <td>Status</td>
+                <td>{{ chamado.get_status_display }}</td>
+            </tr>
+            <tr>
+                <td>Criado por:</td>
+                <td>{{ chamado.usuario.nome_completo }}</td>
+            </tr>
+            <tr>
+                <td>Atendido por:</td>
+                <td>
+                    {% if chamado.atendente %}
+                        {{ chamado.atendente.username }}
+                    {% else %}
+                        Não atendido ainda
+                    {% endif %}
+                </td>
+            </tr>
+            
+        </table>
+
+        {% if chamado.resposta %}
+            <div class="alert alert-info">
+                <strong>Resposta do atendente:</strong>
+                <p>{{ chamado.resposta }}</p>
+            </div>
+        {% endif %}
+    </div>
+</main>
+{% endblock %}
