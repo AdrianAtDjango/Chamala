@@ -1,4 +1,4 @@
-<h1>🧾 Chamalá - Sistema de Chamados</h1>
+<h1>🟣🔴🟡🟢 Chamalá - O Seu Sistema de Chamados!</h1>
 Chamalá é um sistema simples de gerenciamento de chamados desenvolvido com Django. Ele permite que usuários criem, acompanhem e administrem chamados de suporte de maneira eficiente e organizada.
 
 <h2>📦 Funcionalidades</h2>
